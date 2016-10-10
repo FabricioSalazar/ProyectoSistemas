@@ -10,10 +10,6 @@ import com.ucr.proyecto.domain.Constantes;
 import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.domain.Transaccion;
 
-/**
- *
- * @author Juan Carlos Mora B44540
- */
 public class Main {
 
     /**
