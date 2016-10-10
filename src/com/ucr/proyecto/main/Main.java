@@ -7,7 +7,7 @@ import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.domain.Transaccion;
 
 public class Main {
-//Hola Fabri
+
     /**
      * @param args the command line arguments
      */
