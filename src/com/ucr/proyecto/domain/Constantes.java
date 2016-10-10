@@ -14,6 +14,4 @@ public class Constantes {
     public static final String ENVIAR_TRANSACCION = "Enviar";
     public static final String ACTUALIZACION_DE_ESTADOO = "Nuevo_estado";
     
-    
-    
 }

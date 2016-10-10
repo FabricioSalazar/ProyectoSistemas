@@ -34,7 +34,6 @@ public class Client extends Thread {
         this.PUERTO = puerto;
         this.funcion = funcion;
         this.transaccion = transaccion;
-        
     }
 
     @Override
@@ -52,8 +51,9 @@ public class Client extends Thread {
                         System.out.println(transaccion.toString());
                         break;
                 }//switch
-
             }//if
+            salida.close();
+            entrada.close();
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }//try-catch
