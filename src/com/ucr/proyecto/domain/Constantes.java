@@ -8,7 +8,7 @@ package com.ucr.proyecto.domain;
 
 public class Constantes {
 
-    public static final String SERVER_IP = "192.168.43.124";
+    public static final String SERVER_IP = "127.0.0.1";
     public static final String CONEXION_ESTABLECIDA = "Conectado";
     
     public static final String ENVIAR_TRANSACCION = "Enviar";

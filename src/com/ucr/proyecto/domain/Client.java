@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ucr.proyecto.domain;
 
 import java.io.IOException;
@@ -30,6 +34,7 @@ public class Client extends Thread {
         this.PUERTO = puerto;
         this.funcion = funcion;
         this.transaccion = transaccion;
+        
     }
 
     @Override
@@ -53,4 +58,5 @@ public class Client extends Thread {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }//try-catch
     }//fin run
+
 }
