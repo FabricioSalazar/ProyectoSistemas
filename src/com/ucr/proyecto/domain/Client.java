@@ -6,6 +6,7 @@
 package com.ucr.proyecto.domain;
 
 //Hola Juan
+import com.ucr.proyecto.util.Constantes;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

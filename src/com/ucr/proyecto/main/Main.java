@@ -2,7 +2,7 @@
 package com.ucr.proyecto.main;
 
 import com.ucr.proyecto.domain.Client;
-import com.ucr.proyecto.domain.Constantes;
+import com.ucr.proyecto.util.Constantes;
 import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.domain.Transaccion;
 
