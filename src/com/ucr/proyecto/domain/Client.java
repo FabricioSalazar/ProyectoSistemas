@@ -5,6 +5,7 @@
  */
 package com.ucr.proyecto.domain;
 
+//Hola Juan
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
