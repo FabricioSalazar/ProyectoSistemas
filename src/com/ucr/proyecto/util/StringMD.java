@@ -7,6 +7,7 @@ package com.ucr.proyecto.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 public class StringMD {
 
@@ -38,4 +39,12 @@ public class StringMD {
         }//try-catch
         return convertirAHexadecimal(digest);
     }//getStringMessageDigest
+    
+    public static int getRandom(){
+        Random rnd = new Random();
+
+        // Se genera un número aleatorio entre 10000000 y 99999999 
+        int random = 10000000 + rnd.nextInt(90000000);
+        return random;
+    }
 }//fin claseMD
