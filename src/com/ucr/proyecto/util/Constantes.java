@@ -7,7 +7,7 @@ package com.ucr.proyecto.util;
 
 public class Constantes {
 
-    public static final String SERVER_IP = "192.168.43.124";
+    public static final String SERVER_IP = "localhost";
     public static final String CONEXION_ESTABLECIDA = "Conectado";
 
     public static final String ENVIAR_TRANSACCION = "Enviar";

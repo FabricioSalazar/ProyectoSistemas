@@ -27,8 +27,13 @@ public class Empleado implements Serializable {
         this.codEmpleado=codEmpleado;
     }
 
+    public Empleado(String usuario, String contrasena) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+    }
+    
     // @param Parametro extra: Movimientos de cuenta
-    public Empleado(String usuario, String contrasena, int saldo, String numCuenta, String nombre,int codEmpleado, ArrayList movimientos) {
+    public Empleado(String usuario, String contrasena, double saldo, String numCuenta, String nombre,int codEmpleado, ArrayList movimientos) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.saldo = saldo;
