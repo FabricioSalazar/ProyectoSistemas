@@ -5,9 +5,12 @@
  */
 package com.ucr.proyecto.gui;
 
+import com.ucr.proyecto.domain.Client;
 import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.domain.Transaccion;
 import com.ucr.proyecto.util.Constantes;
+import com.ucr.proyecto.util.StringMD;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,12 +22,15 @@ public class Console {
     private Scanner scan;
     private String usuario; 
     private String contrasena;
-    
+    private Empleado empleado;
+    private ArrayList<Empleado> empleados;
+    private Client cliente;
     
     public Console() {
         scan= new Scanner(System.in);
         usuario=null;
         contrasena=null;
+        empleado=null;
     }
 
     // getters & setters
@@ -71,10 +77,13 @@ public class Console {
         System.out.println("Por favor ingresa tu usuario");
         usuario=scan.next();
         System.out.println("Ingresa tu contrasena");
-        contrasena=scan.next();
+        contrasena=StringMD.getStringMessageDigest(scan.next());
         
-        Empleado empleado=new Empleado(usuario, contrasena);
-        //validar que este empleado exista en la base de datos
+        empleado=new Empleado(usuario, contrasena);
+        Transaccion transaccion = new Transaccion(empleado, Constantes.VERIFICACION_DE_DATOS);
+
+        Client c = new Client(5700, Constantes.VERIFICACION_DE_DATOS, transaccion);
+        c.start();
         
         //if(){ si el empleado existe
             menuConsola();
@@ -100,7 +109,8 @@ public class Console {
                 + "1- Acreditar tu cuenta\n"
                 + "2- Debitar tu cuenta\n"
                 + "3- Acreditar otra cuenta\n"
-                + "4- Salir\n\n"
+                + "4- Cerrar Sección\n"
+                + "5- Salir\n\n"
                 + "Ingresa tu eleccion:";
         
         System.out.println(menu);
@@ -119,6 +129,9 @@ public class Console {
                 //se debe pasar el Empleado con la informacion desde la base
                 Empleado emp=null;
                 transaccion=new Transaccion(Constantes.empleadoNulo, cantidad, funcion,emp, detalle);
+                
+                cliente= new Client(5700, Constantes.ENVIAR_TRANSACCION, transaccion);
+                cliente.start();
             break;
             case 2:
                 System.out.println("Por favor ingresa tu numero de cuenta:");
@@ -132,6 +145,9 @@ public class Console {
                 //se debe pasar el Empleado con la informacion desde la base
                 Empleado emp1=null;
                 transaccion=new Transaccion(emp1, cantidad, funcion,Constantes.empleadoNulo, detalle);
+                
+                cliente = new Client(5700, Constantes.ENVIAR_TRANSACCION, transaccion);
+                cliente.start();
             break;
             case 3:
                 System.out.println("Por favor ingresa el numero de cuenta al cual quieres transferir el dinero:");
@@ -148,8 +164,15 @@ public class Console {
                 //Se debe de traer la informacion del empleado de la cuenta que se ingreso
                 Empleado emp3=null;
                 transaccion=new Transaccion(emp2, cantidad, funcion,emp3, detalle);
+                
+                cliente= new Client(5700, Constantes.ENVIAR_TRANSACCION, transaccion);
+                cliente.start();
             break;
             case 4:
+                empleado=null;
+                interfazConsola();
+            break;
+            case 5:
                 System.out.println("Gracias por utilizar nuestra aplicación");
                 System.exit(0);
             break;
