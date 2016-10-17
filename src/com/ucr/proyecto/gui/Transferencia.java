@@ -5,6 +5,9 @@
  */
 package com.ucr.proyecto.gui;
 
+import com.ucr.proyecto.domain.Empleado;
+import java.util.ArrayList;
+
 /**
  *
  * @author Juan Carlos Mora B44540
@@ -13,9 +16,27 @@ public class Transferencia extends javax.swing.JPanel {
 
     /**
      * Creates new form Transferencia
+     *
+     * @param empleados
+     * @param empAct
      */
-    public Transferencia() {
+    public Transferencia(ArrayList<Empleado> empleados, Empleado empAct) {
         initComponents();
+        jb_cuentas.removeAllItems();
+        jl_cuenta.setText("No Cuenta: "+empAct.getNumCuenta());
+        cargarCuentas(empleados, empAct);
+        
+    }
+
+    private void cargarCuentas(ArrayList<Empleado> empleados, Empleado emp) {
+        String nombreUsuarios;
+        for (Empleado empleado : empleados) {
+            if (!emp.getNombre().equals(empleado.getNombre())) {
+                nombreUsuarios = empleado.getNombre();
+                jb_cuentas.addItem(nombreUsuarios);
+            }
+        }
+
     }
 
     /**
