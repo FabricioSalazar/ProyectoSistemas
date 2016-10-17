@@ -50,13 +50,12 @@ public class Main {
                 @Override
                 public void run() {
                     frame = new JFrame();
-                    frame.setVisible(true);
                     inicioDeSesion = new InicioDeSesion();
                     frame.add(inicioDeSesion);
                     frame.pack();
                     frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
                 }
             });
         } else {
