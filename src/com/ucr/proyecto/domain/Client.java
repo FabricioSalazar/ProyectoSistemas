@@ -6,6 +6,7 @@
 package com.ucr.proyecto.domain;
 
 //Hola Juan
+import com.ucr.proyecto.gui.Console;
 import com.ucr.proyecto.gui.Main;
 import com.ucr.proyecto.util.Constantes;
 import java.io.IOException;
@@ -62,6 +63,15 @@ public class Client extends Thread {
                     System.out.println("verificar datos");
                     salida.writeObject(this.transaccion);
                     Main.ingresoAutorizado((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
+                    break;
+                case Constantes.VERIFICACION_DE_DATOS_CONSOLA:
+                    System.out.println("verificar datos consola");
+                    salida.writeObject(this.transaccion);
+                    Main.ingresoAutorizadoConsola((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
+                    break;
+                case Constantes.ENVIAR_TRANSACCION_ACREDITAR:
+                    salida.writeObject(this.transaccion);
+                    Console.respuesta=Console.respuestaServidor(entrada.readLine());
                     break;
             }//switch
 

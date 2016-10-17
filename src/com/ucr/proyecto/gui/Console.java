@@ -20,16 +20,12 @@ import java.util.Scanner;
 public class Console {
 
     private Scanner scan;
-    private String usuario; 
-    private String contrasena;
     private Empleado empleado;
     private ArrayList<Empleado> empleados;
     private Client cliente;
-    
+    public static String respuesta;
     public Console() {
         scan= new Scanner(System.in);
-        usuario=null;
-        contrasena=null;
         empleado=null;
     }
 
@@ -41,71 +37,38 @@ public class Console {
     public void setScan(Scanner scan) {
         this.scan = scan;
     }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public void inferfaz(){
-        System.out.println("Bienvenidos al Sistema Transacional de la Cooperativa TrendNET S.A\n\n"
-                           +"¿Deseas utilizar la aplicacion con interfaz grafica? (S/N)");
-        String seleccion=scan.next();
-        
-        if(seleccion.equalsIgnoreCase("S")){
-            //va el metodo de interfaz grafica
-            System.out.println("Intergaz grafica");
-        }else{
-            interfazConsola();
-        }
-        
-    }
-
-    private void interfazConsola() {
-        
-        System.out.println("Por favor ingresa tu usuario");
-        usuario=scan.next();
+    
+    public void verificarDatos() {
+        System.out.println("\nPor favor ingresa tu usuario");
+        String usuario=scan.next();
         System.out.println("Ingresa tu contrasena");
-        contrasena=StringMD.getStringMessageDigest(scan.next());
-        
-        empleado=new Empleado(usuario, contrasena);
-        Transaccion transaccion = new Transaccion(empleado, Constantes.VERIFICACION_DE_DATOS);
+        String contrasena=StringMD.getStringMessageDigest(scan.next());
 
-        Client c = new Client(5700, Constantes.VERIFICACION_DE_DATOS, transaccion);
+        Empleado emp = new Empleado(usuario, contrasena);
+        Transaccion transaccion = new Transaccion(emp, Constantes.VERIFICACION_DE_DATOS_CONSOLA);
+
+        Client c = new Client(5700, Constantes.VERIFICACION_DE_DATOS_CONSOLA, transaccion);
         c.start();
-        
-        //if(){ si el empleado existe
-            menuConsola();
-        //}else{
-//            System.out.println("Autentificacion incorrecta\n\n");
-//            System.out.println("Gracias por utilizar nuestra aplicación");
-//            System.exit(0);
-        //}
-        
     }
     
-    private void menuConsola(){
+    public void menuConsola(Empleado emp, ArrayList<Empleado> empleados){
         int opcion;
-        String cuenta;
+        
+        Transaccion transaccion;
+        
+        empleado=emp;
+        empleados=empleados;
+        
+        String cuenta=empleado.getNumCuenta();
         String cuentaDestino;
         double cantidad;
         String funcion;
         String detalle;
-        Transaccion transaccion;
         
-        String menu="Bienvenido "+usuario+"\n\n"
-                + "--------  MENU  -------\n"
+        String infoEmpleado="\n\nBienvid@ "+empleado.getNombre()+"\n"
+                            + "Tu saldo es de: "+empleado.getSaldo();
+                
+        String menu="\n\n--------  MENU  -------\n"
                 + "1- Acreditar tu cuenta\n"
                 + "2- Debitar tu cuenta\n"
                 + "3- Acreditar otra cuenta\n"
@@ -113,64 +76,60 @@ public class Console {
                 + "5- Salir\n\n"
                 + "Ingresa tu eleccion:";
         
+        System.out.println(infoEmpleado);
         System.out.println(menu);
         opcion=scan.nextInt();
         
         switch(opcion){
             case 1:
-                System.out.println("Por favor ingresa tu numero de cuenta:");
-                cuenta=scan.next();
-                System.out.println("Ingresa la cantidad a acreditar a tu cuenta");
+                System.out.println("\nIngresa la cantidad a acreditar a tu cuenta");
                 cantidad=scan.nextDouble();
                 System.out.println("Ingresa un detalle acerca de la transacción");
                 detalle=scan.next();
                 funcion="acreditar";
                 
-                //se debe pasar el Empleado con la informacion desde la base
-                Empleado emp=null;
-                transaccion=new Transaccion(Constantes.empleadoNulo, cantidad, funcion,emp, detalle);
                 
-                cliente= new Client(5700, Constantes.ENVIAR_TRANSACCION, transaccion);
-                cliente.start();
+                transaccion=new Transaccion(Constantes.empleadoNulo, cantidad, funcion,empleado, detalle);
+                
+                cliente=new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR, transaccion);
+                
+                System.out.println(respuesta);
             break;
             case 2:
-                System.out.println("Por favor ingresa tu numero de cuenta:");
-                cuenta=scan.next();
-                System.out.println("Ingresa la cantidad a debitar a tu cuenta");
+                System.out.println("\nIngresa la cantidad a debitar a tu cuenta");
                 cantidad=scan.nextDouble();
                 System.out.println("Ingresa un detalle acerca de la transacción");
                 detalle=scan.next();
                 funcion="debitar";
                 
-                //se debe pasar el Empleado con la informacion desde la base
-                Empleado emp1=null;
-                transaccion=new Transaccion(emp1, cantidad, funcion,Constantes.empleadoNulo, detalle);
+                transaccion=new Transaccion(empleado, cantidad, funcion,Constantes.empleadoNulo, detalle);
                 
-                cliente = new Client(5700, Constantes.ENVIAR_TRANSACCION, transaccion);
-                cliente.start();
             break;
             case 3:
-                System.out.println("Por favor ingresa el numero de cuenta al cual quieres transferir el dinero:");
-                cuenta=scan.next();
+                System.out.println("\nPor favor ingresa el numero de cuenta al cual quieres transferir el dinero:");
+                cuentaDestino=scan.next();
                 System.out.println("Ingresa la cantidad a debitar a tu cuenta");
                 cantidad=scan.nextDouble();
                 System.out.println("Ingresa un detalle acerca de la transacción");
                 detalle=scan.next();
                 funcion="acreditarotracuenta";
                 
-                //se debe pasar el Empleado con la informacion desde la base
-                Empleado emp2=null;
+                Empleado empDestino=null;
+                for (int i = 1; i < empleados.size(); i++) {
+                    Empleado tempEmpleado=empleados.get(i);
+                    
+                    if(tempEmpleado.getNumCuenta().equalsIgnoreCase(cuentaDestino)){
+                        empDestino=tempEmpleado;
+                    }
+                }
                 
-                //Se debe de traer la informacion del empleado de la cuenta que se ingreso
-                Empleado emp3=null;
-                transaccion=new Transaccion(emp2, cantidad, funcion,emp3, detalle);
+
+                transaccion=new Transaccion(empleado, cantidad, funcion,empDestino, detalle);
                 
-                cliente= new Client(5700, Constantes.ENVIAR_TRANSACCION, transaccion);
-                cliente.start();
             break;
             case 4:
                 empleado=null;
-                interfazConsola();
+                verificarDatos();
             break;
             case 5:
                 System.out.println("Gracias por utilizar nuestra aplicación");
@@ -181,5 +140,8 @@ public class Console {
                 
                 
     }
-    
+
+    public static String respuestaServidor(String respuesta){
+        return respuesta;
+    }
 }

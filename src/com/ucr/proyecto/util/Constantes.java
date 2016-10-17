@@ -13,8 +13,10 @@ public class Constantes {
     public static final String CONEXION_ESTABLECIDA = "Conectado";
 
     public static final String ENVIAR_TRANSACCION = "Enviar";
+    public static final String ENVIAR_TRANSACCION_ACREDITAR= "Enviar_Acreditar";
     public static final String ACTUALIZACION_DE_ESTADOO = "Nuevo_estado";
     public static final String VERIFICACION_DE_DATOS = "VERIFICAR_DATOS";
+    public static final String VERIFICACION_DE_DATOS_CONSOLA = "VERIFICAR_DATOS_CONSOLA";
     public static final String WAIT_CLIENT = "EN_ESPERA";
 
     public static String MD5 = "MD5";
