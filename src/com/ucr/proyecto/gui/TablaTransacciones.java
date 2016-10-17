@@ -14,8 +14,7 @@ import javax.swing.table.TableCellRenderer;
  * @author Nelson
  */
 public class TablaTransacciones extends JPanel {
-    private DefaultTableModel modeloTabla;
-    private JPanel panelTabla;
+    private DefaultTableModel modeloTabla;   
     private JTable tabla;
     private String[] encabezado = {"Fecha", "Función", "Cantidad"};
     private String [][] data = {{"Cargando datos", "", ""}};
