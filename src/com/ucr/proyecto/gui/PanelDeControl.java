@@ -9,7 +9,13 @@ import com.ucr.proyecto.domain.Empleado;
 import static com.ucr.proyecto.gui.Main.frame;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -24,6 +30,11 @@ public class PanelDeControl extends javax.swing.JPanel {
     private double saldo;
     private Empleado empleadoActual;
     private ArrayList<Empleado> empleados;
+    private DefaultTableModel modeloTabla;
+    private JPanel panelTabla;
+    private JTable tabla;
+    private String[] encabezado = {"Fecha", "Función", "Cantidad"};
+    private String [][] data = {{"Cargando datos", "", ""}};
 
     public PanelDeControl(Empleado empActual, ArrayList<Empleado> empleados) {
         initComponents();
@@ -38,7 +49,42 @@ public class PanelDeControl extends javax.swing.JPanel {
         jp_Transacciones.setBackground(Color.GRAY);
         
         transferencia= new Transferencia(empleados,empleadoActual);
+        modeloTabla = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
         
+        tabla = new JTable(data, encabezado) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
+                Component comp = super.prepareRenderer(renderer, row, col);
+                Object value = getModel().getValueAt(row, 1);
+                if(value.equals("debitar")) {
+                    comp.setBackground(Color.red);
+                } else if (value.equals("acreditar")){
+                    comp.setBackground(Color.green);
+                } else {
+                    comp.setBackground(Color.WHITE);
+                }
+                return comp;
+            }
+        };
+        panelTabla = new JPanel();
+        panelTabla.setBackground(Color.red);
+        panelTabla.setLayout(null);
+        
+        tabla.setModel(modeloTabla);
+        tabla.setAutoCreateRowSorter(true);
+
+        tabla.setFillsViewportHeight(true);
+        tabla.setGridColor(Color.black);
+        tabla.setCellSelectionEnabled(true);
+
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        panelTabla.add(scrollPane).setBounds(0, 0, 285, 310);
+        this.add(panelTabla).setBounds(590, 60, 285, 310);
     }
     
     /**
@@ -50,8 +96,6 @@ public class PanelDeControl extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lista_Movimientos = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jp_Transacciones = new javax.swing.JPanel();
@@ -62,13 +106,6 @@ public class PanelDeControl extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jl_Saldo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-
-        lista_Movimientos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(lista_Movimientos);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -81,7 +118,7 @@ public class PanelDeControl extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,37 +224,18 @@ public class PanelDeControl extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jp_Transacciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jp_Transacciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private Retiro retiro = new Retiro();
-    private Transferencia transferencia;
-
-    private void rb_TransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_TransferenciaActionPerformed
-        rb_Retiro.setSelected(false);
-        jp_Opciones.removeAll();
-        jp_Opciones.setLayout(new BorderLayout());
-        jp_Opciones.add(transferencia);
-        Main.frame.setSize(900, 410);
-
-    }//GEN-LAST:event_rb_TransferenciaActionPerformed
 
     private void rb_RetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_RetiroActionPerformed
         rb_Transferencia.setSelected(false);
@@ -225,8 +243,18 @@ public class PanelDeControl extends javax.swing.JPanel {
         jp_Opciones.setLayout(new BorderLayout());
         jp_Opciones.add(retiro);
         Main.frame.setSize(900, 414);
-       
     }//GEN-LAST:event_rb_RetiroActionPerformed
+
+    private void rb_TransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_TransferenciaActionPerformed
+        rb_Retiro.setSelected(false);
+        jp_Opciones.removeAll();
+        jp_Opciones.setLayout(new BorderLayout());
+        jp_Opciones.add(transferencia);
+        Main.frame.setSize(900, 410);
+    }//GEN-LAST:event_rb_TransferenciaActionPerformed
+
+    private Retiro retiro = new Retiro();
+    private Transferencia transferencia;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -234,12 +262,10 @@ public class PanelDeControl extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jl_Saldo;
     private javax.swing.JLabel jl_Titular;
     private javax.swing.JPanel jp_Opciones;
     private javax.swing.JPanel jp_Transacciones;
-    private javax.swing.JList<String> lista_Movimientos;
     private javax.swing.JRadioButton rb_Retiro;
     private javax.swing.JRadioButton rb_Transferencia;
     // End of variables declaration//GEN-END:variables
