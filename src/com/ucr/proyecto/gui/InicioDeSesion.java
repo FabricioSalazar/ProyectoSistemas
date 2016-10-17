@@ -10,7 +10,8 @@ import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.domain.Transaccion;
 import com.ucr.proyecto.util.Constantes;
 import com.ucr.proyecto.util.StringMD;
-import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -18,7 +19,7 @@ import javax.swing.JLabel;
  *
  * @author Juan Carlos Mora B44540
  */
-public class InicioDeSesion extends javax.swing.JPanel {
+public class InicioDeSesion extends javax.swing.JPanel implements KeyListener{
 
     /**
      * Creates new form InicioDeSesion
@@ -32,7 +33,9 @@ public class InicioDeSesion extends javax.swing.JPanel {
         jLabel3.setIcon(observador);
         observador.setImageObserver(jLabel3);// observador de imagen gif
         jLabel3.setVisible(false);
-
+        
+        text_Usuario.addKeyListener(this);
+        text_Contrasena.addKeyListener(this);
     }
 
     private void verificarDatos() {
@@ -137,7 +140,6 @@ public class InicioDeSesion extends javax.swing.JPanel {
     }//GEN-LAST:event_text_UsuarioActionPerformed
 
     private void button_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_IngresarActionPerformed
-
         verificarDatos();
     }//GEN-LAST:event_button_IngresarActionPerformed
 
@@ -151,4 +153,19 @@ public class InicioDeSesion extends javax.swing.JPanel {
     private javax.swing.JPasswordField text_Contrasena;
     private javax.swing.JTextField text_Usuario;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            verificarDatos();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 }

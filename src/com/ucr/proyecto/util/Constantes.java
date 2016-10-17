@@ -6,6 +6,9 @@
 package com.ucr.proyecto.util;
 
 import com.ucr.proyecto.domain.Empleado;
+import com.ucr.proyecto.domain.Transaccion;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Constantes {
 
@@ -24,5 +27,5 @@ public class Constantes {
     public static String MD5 = "MD5";
 
     public static Empleado empleadoNulo = new Empleado("No suministrado", "null", 0, "00000000", "No suministrado", 0);
-
+    public static List<Transaccion> listaTransacciones = new ArrayList<>();
 }
