@@ -83,11 +83,12 @@ public class Console {
         int opcion;
 
         Transaccion transaccion;
+        
+        empleado=emp;
+        this.empleados=empleados;
+        
+        String cuenta=empleado.getNumCuenta();
 
-        empleado = emp;
-        empleados = empleados;
-
-        String cuenta = empleado.getNumCuenta();
         String cuentaDestino;
         double cantidad;
         String funcion;
@@ -108,13 +109,24 @@ public class Console {
         System.out.println(menu);
         opcion = scan.nextInt();
 
+
         switch (opcion) {//Segun la opcion se piden los datos y se crean las transaciones que luego se envian en un cliente al servidor
             case 1:
                 System.out.println("\nIngresa la cantidad a acreditar a tu cuenta");
                 cantidad = scan.nextDouble();
                 System.out.println("Ingresa un detalle acerca de la transacción");
+                
                 detalle = scan.next();
                 funcion = "acreditar";
+                
+                detalle=scan.next();
+                funcion="acreditar";
+                
+                transaccion = new Transaccion(Constantes.empleadoNulo, cantidad, funcion, empleado, detalle);
+                
+                cliente = new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR, transaccion);
+                cliente.start();
+                
 
                 transaccion = new Transaccion(Constantes.empleadoNulo, cantidad, funcion, empleado, detalle, calendario.getTime().toString());
 
