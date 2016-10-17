@@ -118,15 +118,6 @@ public class Console {
                 
                 detalle = scan.next();
                 funcion = "acreditar";
-                
-                detalle=scan.next();
-                funcion="acreditar";
-                
-                transaccion = new Transaccion(Constantes.empleadoNulo, cantidad, funcion, empleado, detalle);
-                
-                cliente = new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR, transaccion);
-                cliente.start();
-                
 
                 transaccion = new Transaccion(Constantes.empleadoNulo, cantidad, funcion, empleado, detalle, calendario.getTime().toString());
 
