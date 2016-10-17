@@ -26,6 +26,7 @@ public class Client extends Thread {
     private Transaccion transaccion;
     private ObjectOutputStream salida;
     private ObjectInputStream entrada;
+    private Console con= new Console();
 
     public Client(int puerto, String funcion) {
         super("Client");
@@ -65,14 +66,26 @@ public class Client extends Thread {
                     Main.ingresoAutorizado((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
                     break;
                 case Constantes.VERIFICACION_DE_DATOS_CONSOLA:
-                    System.out.println("verificar datos consola");
+                    System.out.println("\nVerificando datos\nPor favor espere");
                     salida.writeObject(this.transaccion);
                     Main.ingresoAutorizadoConsola((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
                     break;
-                case Constantes.ENVIAR_TRANSACCION_ACREDITAR:
+                case Constantes.ENVIAR_TRANSACCION_ACREDITAR://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
-                    Console.respuesta=Console.respuestaServidor(entrada.readLine());
+                    con.setRespuesta((String)entrada.readObject());
+                    System.out.println(con.getRespuesta());//imprime si la transaccion se realizo o no
                     break;
+                case Constantes.ENVIAR_TRANSACCION_DEBITAR://envia la transaccion y recibe el string si la transaccion se pudo realizar
+                    salida.writeObject(this.transaccion);
+                    con.setRespuesta((String)entrada.readObject());
+                    System.out.println(con.getRespuesta());//imprime si la transaccion se realizo o no
+                    break;
+                case Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA://envia la transaccion y recibe el string si la transaccion se pudo realizar
+                    salida.writeObject(this.transaccion);
+                    con.setRespuesta((String)entrada.readObject());
+                    System.out.println(con.getRespuesta());//imprime si la transaccion se realizo o no
+                    break;
+                
             }//switch
 
             salida.close();

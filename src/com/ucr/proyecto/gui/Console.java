@@ -23,10 +23,11 @@ public class Console {
     private Empleado empleado;
     private ArrayList<Empleado> empleados;
     private Client cliente;
-    public static String respuesta;
+    private String respuesta;
+    private Empleado empDestino;
+    
     public Console() {
         scan= new Scanner(System.in);
-        empleado=null;
     }
 
     // getters & setters
@@ -37,6 +38,31 @@ public class Console {
     public void setScan(Scanner scan) {
         this.scan = scan;
     }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public ArrayList<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(ArrayList<Empleado> empleados) {
+        this.empleados = empleados;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+    
     
     public void verificarDatos() {
         System.out.println("\nPor favor ingresa tu usuario");
@@ -49,7 +75,7 @@ public class Console {
 
         Client c = new Client(5700, Constantes.VERIFICACION_DE_DATOS_CONSOLA, transaccion);
         c.start();
-    }
+    }//verificarDatos()
     
     public void menuConsola(Empleado emp, ArrayList<Empleado> empleados){
         int opcion;
@@ -80,7 +106,7 @@ public class Console {
         System.out.println(menu);
         opcion=scan.nextInt();
         
-        switch(opcion){
+        switch(opcion){//Segun la opcion se piden los datos y se crean las transaciones que luego se envian en un cliente al servidor
             case 1:
                 System.out.println("\nIngresa la cantidad a acreditar a tu cuenta");
                 cantidad=scan.nextDouble();
@@ -92,18 +118,22 @@ public class Console {
                 transaccion=new Transaccion(Constantes.empleadoNulo, cantidad, funcion,empleado, detalle);
                 
                 cliente=new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR, transaccion);
+                cliente.start();
                 
-                System.out.println(respuesta);
+
             break;
             case 2:
                 System.out.println("\nIngresa la cantidad a debitar a tu cuenta");
                 cantidad=scan.nextDouble();
+                System.out.println(cantidad);
                 System.out.println("Ingresa un detalle acerca de la transacción");
                 detalle=scan.next();
                 funcion="debitar";
                 
                 transaccion=new Transaccion(empleado, cantidad, funcion,Constantes.empleadoNulo, detalle);
                 
+                cliente=new Client(5700, Constantes.ENVIAR_TRANSACCION_DEBITAR, transaccion);
+                cliente.start();
             break;
             case 3:
                 System.out.println("\nPor favor ingresa el numero de cuenta al cual quieres transferir el dinero:");
@@ -114,18 +144,18 @@ public class Console {
                 detalle=scan.next();
                 funcion="acreditarotracuenta";
                 
-                Empleado empDestino=null;
-                for (int i = 1; i < empleados.size(); i++) {
+                for (int i = 0; i < empleados.size(); i++) {
                     Empleado tempEmpleado=empleados.get(i);
                     
                     if(tempEmpleado.getNumCuenta().equalsIgnoreCase(cuentaDestino)){
-                        empDestino=tempEmpleado;
+                        empDestino=(Empleado)tempEmpleado;
                     }
                 }
                 
-
                 transaccion=new Transaccion(empleado, cantidad, funcion,empDestino, detalle);
                 
+                cliente=new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA, transaccion);
+                cliente.start();
             break;
             case 4:
                 empleado=null;
@@ -136,12 +166,7 @@ public class Console {
                 System.exit(0);
             break;
                 
-        }
+        } //switch     
                 
-                
-    }
-
-    public static String respuestaServidor(String respuesta){
-        return respuesta;
-    }
+    }//menuConsola()
 }
