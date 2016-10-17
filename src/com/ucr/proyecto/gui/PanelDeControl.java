@@ -224,7 +224,7 @@ public class PanelDeControl extends javax.swing.JPanel {
         jp_Opciones.removeAll();
         jp_Opciones.setLayout(new BorderLayout());
         jp_Opciones.add(retiro);
-         Main.frame.setSize(900, 414);
+        Main.frame.setSize(900, 414);
        
     }//GEN-LAST:event_rb_RetiroActionPerformed
 

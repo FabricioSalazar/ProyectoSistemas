@@ -55,8 +55,7 @@ public class Main {
     //si se autoriza el ingreso se accede a la pantalla para administrar la cuenta
 
     public static void ingresoAutorizado(boolean autorizacion, Empleado emp, ArrayList<Empleado> empleados) {
-        if (autorizacion) {
-            
+        if (autorizacion) {         
             frame.remove(inicioDeSesion);
             panelDeControl = new PanelDeControl(emp,empleados);
             frame.add(panelDeControl);
