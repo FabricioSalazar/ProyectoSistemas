@@ -83,7 +83,7 @@ public class Console {
         Transaccion transaccion;
         
         empleado=emp;
-        empleados=empleados;
+        this.empleados=empleados;
         
         String cuenta=empleado.getNumCuenta();
         String cuentaDestino;
@@ -104,7 +104,7 @@ public class Console {
         
         System.out.println(infoEmpleado);
         System.out.println(menu);
-        opcion=scan.nextInt();
+        opcion = scan.nextInt();
         
         switch(opcion){//Segun la opcion se piden los datos y se crean las transaciones que luego se envian en un cliente al servidor
             case 1:
@@ -114,10 +114,9 @@ public class Console {
                 detalle=scan.next();
                 funcion="acreditar";
                 
+                transaccion = new Transaccion(Constantes.empleadoNulo, cantidad, funcion, empleado, detalle);
                 
-                transaccion=new Transaccion(Constantes.empleadoNulo, cantidad, funcion,empleado, detalle);
-                
-                cliente=new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR, transaccion);
+                cliente = new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR, transaccion);
                 cliente.start();
                 
 

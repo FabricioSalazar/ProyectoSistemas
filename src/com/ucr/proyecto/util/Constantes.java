@@ -16,7 +16,7 @@ public class Constantes {
     public static final String ENVIAR_TRANSACCION_ACREDITAR= "Enviar_Acreditar";
     public static final String ENVIAR_TRANSACCION_DEBITAR= "Enviar_Debitar";
     public static final String ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA= "Enviar_Acreditar_Otra_Cuenta";
-    public static final String ACTUALIZACION_DE_ESTADOO = "Nuevo_estado";
+    public static final String ACTUALIZACION_DE_ESTADOO = "NUEVO_ESTADO";
     public static final String VERIFICACION_DE_DATOS = "VERIFICAR_DATOS";
     public static final String VERIFICACION_DE_DATOS_CONSOLA = "VERIFICAR_DATOS_CONSOLA";
     public static final String WAIT_CLIENT = "EN_ESPERA";
