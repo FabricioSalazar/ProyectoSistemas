@@ -8,14 +8,7 @@ package com.ucr.proyecto.gui;
 import com.ucr.proyecto.domain.Empleado;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-
 /**
  *
  * @author Juan Carlos Mora B44540
@@ -29,13 +22,9 @@ public class PanelDeControl extends javax.swing.JPanel {
     private double saldo;
     private Empleado empleadoActual;
     private ArrayList<Empleado> empleados;
-    private DefaultTableModel modeloTabla;
-    private JPanel panelTabla;
-    private JTable tabla;
-    private String[] encabezado = {"Fecha", "Función", "Cantidad"};
-    private String [][] data = {{"Cargando datos", "", ""}};
-    private Retiro retiro;
+    private TablaTransacciones tablaTransacciones;
     private Transferencia transferencia;
+    private Retiro retiro;
 
     public PanelDeControl(Empleado empActual, ArrayList<Empleado> empleados) {
         initComponents();
@@ -48,44 +37,11 @@ public class PanelDeControl extends javax.swing.JPanel {
         jl_Titular.setText(titular);
         jl_Saldo.setText("Saldo Actual: " + saldo);
         jp_Transacciones.setBackground(Color.GRAY);
-
-        transferencia = new Transferencia(empleados, empActual, this);
-        modeloTabla = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int fila, int columna) {
-                return false;
-            }
-        };
-
-        tabla = new JTable(data, encabezado) {
-            @Override
-            public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
-                Component comp = super.prepareRenderer(renderer, row, col);
-                Object value = getModel().getValueAt(row, 1);
-                if(value.equals("debitar")) {
-                    comp.setBackground(Color.red);
-                } else if (value.equals("acreditar")){
-                    comp.setBackground(Color.green);
-                } else {
-                    comp.setBackground(Color.WHITE);
-                }
-                return comp;
-            }
-        };
-        panelTabla = new JPanel();
-        panelTabla.setBackground(Color.red);
-        panelTabla.setLayout(null);
-
-        tabla.setModel(modeloTabla);
-        tabla.setAutoCreateRowSorter(true);
-
-        tabla.setFillsViewportHeight(true);
-        tabla.setGridColor(Color.black);
-        tabla.setCellSelectionEnabled(true);
-
-        JScrollPane scrollPane = new JScrollPane(tabla);
-        panelTabla.add(scrollPane).setBounds(0, 0, 285, 310);
-        this.add(panelTabla).setBounds(590, 60, 285, 310);
+        
+        transferencia= new Transferencia(empleados,empleadoActual,this);
+        retiro = new Retiro(empActual, this);
+        tablaTransacciones = new TablaTransacciones();
+        this.add(tablaTransacciones).setBounds(590, 60, 285, 310);
     }
 
     /**

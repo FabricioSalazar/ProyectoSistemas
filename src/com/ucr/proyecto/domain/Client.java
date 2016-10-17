@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +42,6 @@ public class Client extends Thread {
         this.PUERTO = puerto;
         this.funcion = funcion;
         this.transaccion = transaccion;
-
     }
 
     @Override
@@ -64,6 +64,9 @@ public class Client extends Thread {
                     System.out.println("verificar datos");
                     salida.writeObject(this.transaccion);
                     Main.ingresoAutorizado((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
+                    salida.writeObject(transaccion.getEmpleado().getCodEmpleado());
+                    Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
+                    System.out.println(Constantes.listaTransacciones.get(0));
                     break;
                 case Constantes.VERIFICACION_DE_DATOS_CONSOLA:
                     System.out.println("\nVerificando datos\nPor favor espere");
