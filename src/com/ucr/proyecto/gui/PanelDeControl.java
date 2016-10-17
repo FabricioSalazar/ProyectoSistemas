@@ -36,8 +36,11 @@ public class PanelDeControl extends javax.swing.JPanel {
         jl_Titular.setText(titular);
         jl_Saldo.setText("Saldo Actual: " + saldo);
         jp_Transacciones.setBackground(Color.GRAY);
+        
+        transferencia= new Transferencia(empleados,empleadoActual);
+        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -205,7 +208,7 @@ public class PanelDeControl extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private Retiro retiro = new Retiro();
-    private Transferencia transferencia= new Transferencia();
+    private Transferencia transferencia;
 
     private void rb_TransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_TransferenciaActionPerformed
         rb_Retiro.setSelected(false);
