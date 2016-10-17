@@ -63,10 +63,11 @@ public class Client extends Thread {
                 case Constantes.VERIFICACION_DE_DATOS:
                     System.out.println("verificar datos");
                     salida.writeObject(this.transaccion);
-                    Main.ingresoAutorizado((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
-                    salida.writeObject(transaccion.getEmpleado().getCodEmpleado());
+                    
+                    salida.writeObject(transaccion.getEmpleado().getUsuario());
                     Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
-                    System.out.println(Constantes.listaTransacciones.get(0));
+                    
+                    Main.ingresoAutorizado((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
                     break;
                 case Constantes.VERIFICACION_DE_DATOS_CONSOLA:
                     System.out.println("\nVerificando datos\nPor favor espere");

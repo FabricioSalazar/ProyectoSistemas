@@ -67,13 +67,16 @@ public class TablaTransacciones extends JPanel {
     }
     
     public void llenarTabla() {
-        System.out.println("hola: " + Constantes.listaTransacciones.size());
-        for (int i = 0; i < Constantes.listaTransacciones.size(); i++) {
-            data[i][0] = Constantes.listaTransacciones.get(i).getFecha();
-            data[i][0] = Constantes.listaTransacciones.get(i).getFuncion();
-            data[i][0] = Constantes.listaTransacciones.get(i).getCantidad() + "";
+        if (!Constantes.listaTransacciones.isEmpty()) {
+            data = new String[Constantes.listaTransacciones.size()][3];
+            for (int i = 0; i < Constantes.listaTransacciones.size(); i++) {
+                System.out.println(Constantes.listaTransacciones.get(i).getFuncion());
+                data[i][0] = Constantes.listaTransacciones.get(i).getFecha();
+                data[i][1] = Constantes.listaTransacciones.get(i).getFuncion();
+                data[i][2] = Constantes.listaTransacciones.get(i).getCantidad() + "";
+            }
+            modeloTabla.setDataVector(data, encabezado);
+            tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         }
-        modeloTabla.setDataVector(data, encabezado);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
 }
