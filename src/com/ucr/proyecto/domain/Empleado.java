@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ucr.proyecto.domain;
 
 import java.io.Serializable;
@@ -24,27 +19,26 @@ public class Empleado implements Serializable {
         this.saldo = saldo;
         this.numCuenta = numCuenta;
         this.nombre = nombre;
-        this.codEmpleado=codEmpleado;
+        this.codEmpleado = codEmpleado;
     }
 
     public Empleado(String usuario, String contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
-    
+
     // @param Parametro extra: Movimientos de cuenta
-    public Empleado(String usuario, String contrasena, double saldo, String numCuenta, String nombre,int codEmpleado, ArrayList movimientos) {
+    public Empleado(String usuario, String contrasena, double saldo, String numCuenta, String nombre, int codEmpleado, ArrayList movimientos) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.saldo = saldo;
         this.numCuenta = numCuenta;
         this.nombre = nombre;
-        this.codEmpleado=codEmpleado;
+        this.codEmpleado = codEmpleado;
         this.movimientos = movimientos;
     }
-    
+
     //****getter & setter
-    
     public String getUsuario() {
         return usuario;
     }
@@ -84,13 +78,13 @@ public class Empleado implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public int getCodEmpleado(){
+
+    public int getCodEmpleado() {
         return codEmpleado;
     }
-    
-    public void setCodEmpleado(int codEmpleado){
-        this.codEmpleado=codEmpleado;
+
+    public void setCodEmpleado(int codEmpleado) {
+        this.codEmpleado = codEmpleado;
     }
 
     public ArrayList getMovimientos() {
@@ -105,7 +99,4 @@ public class Empleado implements Serializable {
     public String toString() {
         return "Empleado{" + "usuario=" + usuario + ", contrasena=" + contrasena + ", saldo=" + saldo + ", numCuenta=" + numCuenta + ", nombre=" + nombre + '}';
     }
-    
-    
-    
 }
