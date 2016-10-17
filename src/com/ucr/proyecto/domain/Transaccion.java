@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ucr.proyecto.domain;
 
 import java.io.Serializable;
@@ -14,6 +9,7 @@ public class Transaccion implements Serializable {
     private String funcion;
     private Empleado empleadoDestino;
     private String detalle;
+    private String fecha;
 
     public Transaccion(Empleado empleado, double cantidad, String funcion, Empleado empleadoDestino, String detalle) {
         this.empleado = empleado;
@@ -21,6 +17,15 @@ public class Transaccion implements Serializable {
         this.funcion = funcion;
         this.empleadoDestino = empleadoDestino;
         this.detalle = detalle;
+    }
+
+    public Transaccion(Empleado empleado, double cantidad, String funcion, Empleado empleadoDestino, String detalle, String fecha) {
+        this.empleado = empleado;
+        this.cantidad = cantidad;
+        this.funcion = funcion;
+        this.empleadoDestino = empleadoDestino;
+        this.detalle = detalle;
+        this.fecha = fecha;
     }
 
     public Transaccion(Empleado empleado, double cantidad, String funcion, String detalle) {
@@ -76,4 +81,16 @@ public class Transaccion implements Serializable {
         this.detalle = detalle;
     }
 
+    @Override
+    public String toString() {
+        return "Transaccion{" + "empleado=" + empleado + ", cantidad=" + cantidad + ", funcion=" + funcion + ", empleadoDestino=" + empleadoDestino + ", detalle=" + detalle + ", fecha=" + fecha + '}';
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 }
