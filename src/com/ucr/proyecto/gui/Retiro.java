@@ -5,6 +5,11 @@
  */
 package com.ucr.proyecto.gui;
 
+import com.ucr.proyecto.domain.Client;
+import com.ucr.proyecto.domain.Empleado;
+import com.ucr.proyecto.domain.Transaccion;
+import com.ucr.proyecto.util.Constantes;
+
 /**
  *
  * @author Juan Carlos Mora B44540
@@ -14,8 +19,12 @@ public class Retiro extends javax.swing.JPanel {
     /**
      * Creates new form Retiro
      */
-    public Retiro() {
+    Empleado emp;
+    PanelDeControl p;
+    public Retiro(Empleado empAct, PanelDeControl p) {
         initComponents();
+        this.emp = empAct;
+        this.p = p;
     }
 
     /**
@@ -32,8 +41,15 @@ public class Retiro extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jl_cuenta = new javax.swing.JLabel();
+        jtf_Detalle = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jb_retirar.setText("Retirar");
+        jb_retirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_retirarActionPerformed(evt);
+            }
+        });
 
         jtf_monto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +79,14 @@ public class Retiro extends javax.swing.JPanel {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
+        jtf_Detalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_DetalleActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Ingrese el detalle");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,14 +94,18 @@ public class Retiro extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jtf_monto)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtf_Detalle, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtf_monto))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jb_retirar)
-                        .addGap(53, 53, 53))))
+                        .addGap(53, 53, 53))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(262, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -87,13 +115,17 @@ public class Retiro extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jtf_Detalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_retirar)
                     .addComponent(jtf_monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -101,12 +133,30 @@ public class Retiro extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_montoActionPerformed
 
+    private void jtf_DetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_DetalleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_DetalleActionPerformed
+
+    private void jb_retirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_retirarActionPerformed
+        // TODO add your handling code here
+        if (jtf_monto.getText().equals("")) return;
+        double monto = Double.parseDouble(jtf_monto.getText());
+        Transaccion t = new Transaccion(emp,
+                monto,
+                "debitar", Constantes.empleadoNulo, jtf_Detalle.getText());
+        
+        new Client(5700, Constantes.ENVIAR_TRANSACCION_DEBITAR, t).start();
+        if(p.getMonto() >= monto) p.actualizaMonto(p.getMonto()-monto);
+    }//GEN-LAST:event_jb_retirarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jb_retirar;
     private javax.swing.JLabel jl_cuenta;
+    private javax.swing.JTextField jtf_Detalle;
     private javax.swing.JTextField jtf_monto;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,8 +37,8 @@ public class PanelDeControl extends javax.swing.JPanel {
         jl_Saldo.setText("Saldo Actual: " + saldo);
         jp_Transacciones.setBackground(Color.GRAY);
         
-        transferencia= new Transferencia(empleados,empleadoActual);
-        
+        transferencia= new Transferencia(empleados,empleadoActual, this);
+        retiro = new Retiro(empleadoActual, this);
     }
     
     /**
@@ -207,7 +207,7 @@ public class PanelDeControl extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private Retiro retiro = new Retiro();
+    private Retiro retiro;
     private Transferencia transferencia;
 
     private void rb_TransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_TransferenciaActionPerformed
@@ -228,7 +228,15 @@ public class PanelDeControl extends javax.swing.JPanel {
        
     }//GEN-LAST:event_rb_RetiroActionPerformed
 
-
+    public void actualizaMonto(double monto){
+        jl_Saldo.setText("Saldo actual: "+monto);
+    }
+    
+    public double getMonto() {
+        String saldo = jl_Saldo.getText();
+        saldo = saldo.substring(saldo.lastIndexOf(" ")+1);
+        return Double.parseDouble(saldo);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

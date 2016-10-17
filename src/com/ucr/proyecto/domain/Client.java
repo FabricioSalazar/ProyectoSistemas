@@ -26,7 +26,7 @@ public class Client extends Thread {
     private Transaccion transaccion;
     private ObjectOutputStream salida;
     private ObjectInputStream entrada;
-    private Console con= new Console();
+    private Console con = new Console();
 
     public Client(int puerto, String funcion) {
         super("Client");
@@ -94,7 +94,6 @@ public class Client extends Thread {
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //try-catch
         //try-catch
     }//fin run
 }
