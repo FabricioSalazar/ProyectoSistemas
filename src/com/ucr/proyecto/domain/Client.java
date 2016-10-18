@@ -61,7 +61,6 @@ public class Client extends Thread {
                 case Constantes.WAIT_CLIENT:
                     break;
                 case Constantes.VERIFICACION_DE_DATOS:
-                    System.out.println("verificar datos");
                     salida.writeObject(this.transaccion);
                     
                     salida.writeObject(transaccion.getEmpleado().getUsuario());
