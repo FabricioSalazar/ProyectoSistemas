@@ -204,7 +204,7 @@ public class PanelDeControl extends javax.swing.JPanel {
                         .addComponent(jp_Transacciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(0, 11, Short.MAX_VALUE))))
+                        .addGap(0, 19, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,7 +213,7 @@ public class PanelDeControl extends javax.swing.JPanel {
         jp_Opciones.removeAll();
         jp_Opciones.setLayout(new BorderLayout());
         jp_Opciones.add(transferencia);
-        Main.frame.setSize(900, 410);
+        Main.frame.setSize(900, 430);
 
     }//GEN-LAST:event_rb_TransferenciaActionPerformed
 
@@ -222,7 +222,7 @@ public class PanelDeControl extends javax.swing.JPanel {
         jp_Opciones.removeAll();
         jp_Opciones.setLayout(new BorderLayout());
         jp_Opciones.add(retiro);
-        Main.frame.setSize(900, 414);
+        Main.frame.setSize(900, 434);
     }//GEN-LAST:event_rb_RetiroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
