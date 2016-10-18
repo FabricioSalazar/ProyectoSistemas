@@ -6,7 +6,6 @@
 package com.ucr.proyecto.gui;
 
 import com.ucr.proyecto.domain.Empleado;
-import static com.ucr.proyecto.gui.Main.frame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -24,6 +23,8 @@ public class PanelDeControl extends javax.swing.JPanel {
     private Empleado empleadoActual;
     private ArrayList<Empleado> empleados;
     private TablaTransacciones tablaTransacciones;
+    private Transferencia transferencia;
+    private Retiro retiro;
 
     public PanelDeControl(Empleado empActual, ArrayList<Empleado> empleados) {
         initComponents();
@@ -37,11 +38,12 @@ public class PanelDeControl extends javax.swing.JPanel {
         jl_Saldo.setText("Saldo Actual: " + saldo);
         jp_Transacciones.setBackground(Color.GRAY);
         
-        transferencia= new Transferencia(empleados,empleadoActual);
+        transferencia= new Transferencia(empleados,empleadoActual,this);
+        retiro = new Retiro(empActual, this);
         tablaTransacciones = new TablaTransacciones();
         this.add(tablaTransacciones).setBounds(590, 60, 285, 310);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,6 +194,15 @@ public class PanelDeControl extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rb_TransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_TransferenciaActionPerformed
+        rb_Retiro.setSelected(false);
+        jp_Opciones.removeAll();
+        jp_Opciones.setLayout(new BorderLayout());
+        jp_Opciones.add(transferencia);
+        Main.frame.setSize(900, 410);
+
+    }//GEN-LAST:event_rb_TransferenciaActionPerformed
+
     private void rb_RetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_RetiroActionPerformed
         rb_Transferencia.setSelected(false);
         jp_Opciones.removeAll();
@@ -200,18 +211,15 @@ public class PanelDeControl extends javax.swing.JPanel {
         Main.frame.setSize(900, 414);
     }//GEN-LAST:event_rb_RetiroActionPerformed
 
-    private void rb_TransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_TransferenciaActionPerformed
-        rb_Retiro.setSelected(false);
-        jp_Opciones.removeAll();
-        jp_Opciones.setLayout(new BorderLayout());
-        jp_Opciones.add(transferencia);
-        Main.frame.setSize(900, 410);
-    }//GEN-LAST:event_rb_TransferenciaActionPerformed
+    public void actualizaMonto(double monto){
+        jl_Saldo.setText("Saldo actual: "+monto);
+    }
 
-    private Retiro retiro = new Retiro();
-    private Transferencia transferencia;
-
-
+    public double getMonto() {
+        String saldo = jl_Saldo.getText();
+        saldo = saldo.substring(saldo.lastIndexOf(" ")+1);
+        return Double.parseDouble(saldo);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -101,7 +101,7 @@ public class Console {
                 + "1- Acreditar tu cuenta\n"
                 + "2- Debitar tu cuenta\n"
                 + "3- Acreditar otra cuenta\n"
-                + "4- Cerrar Sección\n"
+                + "4- Cerrar Sesión\n"
                 + "5- Salir\n\n"
                 + "Ingresa tu eleccion:";
 

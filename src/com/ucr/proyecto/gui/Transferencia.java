@@ -5,7 +5,10 @@
  */
 package com.ucr.proyecto.gui;
 
+import com.ucr.proyecto.domain.Client;
 import com.ucr.proyecto.domain.Empleado;
+import com.ucr.proyecto.domain.Transaccion;
+import com.ucr.proyecto.util.Constantes;
 import java.util.ArrayList;
 
 /**
@@ -20,19 +23,26 @@ public class Transferencia extends javax.swing.JPanel {
      * @param empleados
      * @param empAct
      */
-    public Transferencia(ArrayList<Empleado> empleados, Empleado empAct) {
+    private ArrayList<Empleado> empleados;
+    private Empleado empAct;
+    private Empleado empDest;
+    private PanelDeControl p;
+    
+    public Transferencia(ArrayList<Empleado> empleados, Empleado empAct, PanelDeControl p) {
         initComponents();
         jb_cuentas.removeAllItems();
         jl_cuenta.setText("No Cuenta: "+empAct.getNumCuenta());
         cargarCuentas(empleados, empAct);
-        
+        this.empleados = empleados;
+        this.empAct = empAct;
+        this.p = p;
     }
 
     private void cargarCuentas(ArrayList<Empleado> empleados, Empleado emp) {
         String nombreUsuarios;
         for (Empleado empleado : empleados) {
-            if (!emp.getNombre().equals(empleado.getNombre())) {
-                nombreUsuarios = empleado.getNombre();
+            if (!emp.getNumCuenta().equals(empleado.getNumCuenta())) {
+                nombreUsuarios = empleado.getNombre()+" "+empleado.getNumCuenta();
                 jb_cuentas.addItem(nombreUsuarios);
             }
         }
@@ -53,6 +63,9 @@ public class Transferencia extends javax.swing.JPanel {
         jb_cuentas = new javax.swing.JComboBox<>();
         jb_transferir = new javax.swing.JButton();
         jtf_monto = new javax.swing.JTextField();
+        jtf_detalle = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -76,14 +89,34 @@ public class Transferencia extends javax.swing.JPanel {
         );
 
         jb_cuentas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jb_cuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_cuentasActionPerformed(evt);
+            }
+        });
 
         jb_transferir.setText("Transferir");
+        jb_transferir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_transferirActionPerformed(evt);
+            }
+        });
 
         jtf_monto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_montoActionPerformed(evt);
             }
         });
+
+        jtf_detalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_detalleActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Monto:");
+
+        jLabel2.setText("Detalle:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,14 +126,26 @@ public class Transferencia extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtf_monto, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jb_transferir))
-                    .addComponent(jb_cuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtf_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(107, 107, 107)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jb_cuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(107, 107, 107)
+                                    .addComponent(jLabel1)
+                                    .addGap(110, 110, 110))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jtf_monto, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jb_transferir))))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,11 +154,19 @@ public class Transferencia extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(jb_cuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_transferir))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtf_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jb_transferir)
+                        .addComponent(jtf_monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 31, Short.MAX_VALUE)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -121,12 +174,49 @@ public class Transferencia extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_montoActionPerformed
 
+    private void jb_transferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_transferirActionPerformed
+        if(jtf_monto.getText().equals("")) return;
+        double monto = Double.parseDouble(jtf_monto.getText());
+        Transaccion t = new Transaccion(empAct,
+                monto,
+                "acreditarotracuenta",
+                getEmpleadoSeleccionado(), jtf_detalle.getText());
+        
+        new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA, t)
+                .start();
+        
+        if (p.getMonto() >= monto) {
+            p.actualizaMonto(p.getMonto()-monto);
+        }
+    }//GEN-LAST:event_jb_transferirActionPerformed
 
+    private void jtf_detalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_detalleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_detalleActionPerformed
+
+    private void jb_cuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cuentasActionPerformed
+
+    }//GEN-LAST:event_jb_cuentasActionPerformed
+
+    private Empleado getEmpleadoSeleccionado(){
+        String emp = jb_cuentas.getSelectedItem().toString();
+        emp = emp.substring(emp.lastIndexOf(" ")+1);
+        Empleado empSelected = null;
+        for(Empleado e: empleados){
+            if (e.getNumCuenta().equals(emp)){
+                empSelected = e;
+            }
+        }
+        return empSelected;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jb_cuentas;
     private javax.swing.JButton jb_transferir;
     private javax.swing.JLabel jl_cuenta;
+    private javax.swing.JTextField jtf_detalle;
     private javax.swing.JTextField jtf_monto;
     // End of variables declaration//GEN-END:variables
 }
