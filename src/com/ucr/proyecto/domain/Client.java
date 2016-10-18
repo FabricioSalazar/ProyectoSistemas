@@ -74,6 +74,9 @@ public class Client extends Thread {
                     System.out.println("\nVerificando datos\nPor favor espere");
                     salida.writeObject(this.transaccion);
                     Main.ingresoAutorizadoConsola((boolean) entrada.readObject(), (Empleado) entrada.readObject(), (ArrayList<Empleado>) entrada.readObject());
+                    
+                    salida.writeObject(transaccion.getEmpleado().getUsuario());
+                    Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
                     break;
                 case Constantes.ENVIAR_TRANSACCION_ACREDITAR://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
@@ -83,7 +86,8 @@ public class Client extends Thread {
                     }else{
                         System.out.println(respuesta);//imprime si la transaccion se realizo o no
                     }
-                    
+                    salida.writeObject(transaccion.getEmpleado().getUsuario());
+                    Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
                     break;
                 case Constantes.ENVIAR_TRANSACCION_DEBITAR://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
@@ -93,6 +97,9 @@ public class Client extends Thread {
                     }else{
                         System.out.println(respuesta);//imprime si la transaccion se realizo o no
                     }
+                    
+                    salida.writeObject(transaccion.getEmpleado().getUsuario());
+                    Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
                     break;
                 case Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
@@ -102,6 +109,9 @@ public class Client extends Thread {
                     }else{
                         System.out.println(respuesta);//imprime si la transaccion se realizo o no
                     }
+                    
+                    salida.writeObject(transaccion.getEmpleado().getUsuario());
+                    Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
                     break;
                 
             }//switch

@@ -7,9 +7,13 @@ package com.ucr.proyecto.gui;
 
 import com.ucr.proyecto.main.Main;
 import com.ucr.proyecto.domain.Empleado;
+import com.ucr.proyecto.util.Constantes;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
 /**
  *
  * @author Juan Carlos Mora B44540
@@ -26,6 +30,7 @@ public class PanelDeControl extends javax.swing.JPanel {
     private TablaTransacciones tablaTransacciones;
     private Transferencia transferencia;
     private Retiro retiro;
+    private Timer timer;
 
     public PanelDeControl(Empleado empActual, ArrayList<Empleado> empleados) {
         initComponents();
@@ -42,6 +47,16 @@ public class PanelDeControl extends javax.swing.JPanel {
         transferencia= new Transferencia(empleados,empleadoActual,this);
         retiro = new Retiro(empActual, this);
         tablaTransacciones = new TablaTransacciones();
+        
+        timer = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tablaTransacciones.llenarTabla();
+                timer.restart();
+            }
+        });
+        timer.start();
+        
         this.add(tablaTransacciones).setBounds(590, 60, 285, 310);
     }
 
