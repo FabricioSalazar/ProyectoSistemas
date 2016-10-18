@@ -36,7 +36,6 @@ public class PanelDeControl extends javax.swing.JPanel {
         initComponents();
         this.saldo = empActual.getSaldo();
         this.titular = empActual.getNombre();
-
         empleadoActual = empActual;
         this.empleados = empleados;
 
@@ -78,7 +77,6 @@ public class PanelDeControl extends javax.swing.JPanel {
         jl_Titular = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jl_Saldo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -136,8 +134,6 @@ public class PanelDeControl extends javax.swing.JPanel {
 
         jl_Saldo.setText("Saldo Actual: ");
 
-        jLabel2.setText("Ahorro: ");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -145,17 +141,13 @@ public class PanelDeControl extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jl_Saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_Saldo)
-                    .addComponent(jLabel2))
+                .addComponent(jl_Saldo)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -238,7 +230,6 @@ public class PanelDeControl extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel jl_Saldo;
