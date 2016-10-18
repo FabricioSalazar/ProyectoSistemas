@@ -5,6 +5,7 @@
  */
 package com.ucr.proyecto.gui;
 
+import com.ucr.proyecto.domain.Client;
 import com.ucr.proyecto.main.Main;
 import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.util.Constantes;
@@ -79,6 +80,7 @@ public class PanelDeControl extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jl_Saldo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -138,6 +140,13 @@ public class PanelDeControl extends javax.swing.JPanel {
 
         jLabel2.setText("Ahorro: ");
 
+        jButton1.setText("Refrescar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -147,7 +156,9 @@ public class PanelDeControl extends javax.swing.JPanel {
                 .addComponent(jl_Saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +166,8 @@ public class PanelDeControl extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jl_Saldo)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -170,7 +182,7 @@ public class PanelDeControl extends javax.swing.JPanel {
                 .addComponent(rb_Retiro)
                 .addGap(41, 41, 41)
                 .addComponent(jl_Titular, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jp_Opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -227,6 +239,11 @@ public class PanelDeControl extends javax.swing.JPanel {
         Main.frame.setSize(900, 414);
     }//GEN-LAST:event_rb_RetiroActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Client cliente = new Client(5700, Constantes.ACTUALIZAR_LISTA);
+        cliente.start();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void actualizaMonto(double monto){
         jl_Saldo.setText("Saldo actual: "+monto);
     }
@@ -237,6 +254,7 @@ public class PanelDeControl extends javax.swing.JPanel {
         return Double.parseDouble(saldo);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

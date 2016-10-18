@@ -30,4 +30,5 @@ public class Constantes {
     public static List<Transaccion> listaTransacciones = new ArrayList<>();
     
     public static boolean GUI=false;
+    public static final String ACTUALIZAR_LISTA = "ACTUALIZAR_LISTA";
 }
