@@ -10,6 +10,7 @@ import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.domain.Transaccion;
 import com.ucr.proyecto.util.Constantes;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Transferencia extends javax.swing.JPanel {
     private Empleado empAct;
     private Empleado empDest;
     private PanelDeControl p;
+    private Calendar calendario;
     
     public Transferencia(ArrayList<Empleado> empleados, Empleado empAct, PanelDeControl p) {
         initComponents();
@@ -36,6 +38,7 @@ public class Transferencia extends javax.swing.JPanel {
         this.empleados = empleados;
         this.empAct = empAct;
         this.p = p;
+        
     }
 
     private void cargarCuentas(ArrayList<Empleado> empleados, Empleado emp) {
@@ -177,10 +180,11 @@ public class Transferencia extends javax.swing.JPanel {
     private void jb_transferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_transferirActionPerformed
         if(jtf_monto.getText().equals("")) return;
         double monto = Double.parseDouble(jtf_monto.getText());
+        calendario = Calendar.getInstance();
         Transaccion t = new Transaccion(empAct,
                 monto,
                 "acreditarotracuenta",
-                getEmpleadoSeleccionado(), jtf_detalle.getText());
+                getEmpleadoSeleccionado(), jtf_detalle.getText(), calendario.getTime().toString());
         
         new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA, t)
                 .start();

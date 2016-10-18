@@ -103,7 +103,7 @@ public class Client extends Thread {
                     break;
                 case Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
-                     respuesta=(String)entrada.readObject();
+                    respuesta=(String)entrada.readObject();
                     if(Constantes.GUI){
                         JOptionPane.showMessageDialog(null, respuesta);
                     }else{
