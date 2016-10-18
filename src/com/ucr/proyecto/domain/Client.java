@@ -1,13 +1,13 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template file, choose Tools | Templatess
  * and open the template in the editor.
  */
 package com.ucr.proyecto.domain;
 
 //Hola Juan
 import com.ucr.proyecto.gui.Console;
-import com.ucr.proyecto.gui.Main;
+import com.ucr.proyecto.main.Main;
 import com.ucr.proyecto.util.Constantes;
 import java.io.IOException;
 import java.io.ObjectInputStream;

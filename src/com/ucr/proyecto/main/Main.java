@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ucr.proyecto.gui;
+package com.ucr.proyecto.main;
 
-import com.ucr.proyecto.domain.Client;
 import com.ucr.proyecto.domain.Empleado;
-import com.ucr.proyecto.util.Constantes;
+import com.ucr.proyecto.gui.Console;
+import com.ucr.proyecto.gui.InicioDeSesion;
+import com.ucr.proyecto.gui.PanelDeControl;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Scanner;

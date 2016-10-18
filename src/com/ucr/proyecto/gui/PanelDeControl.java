@@ -5,6 +5,7 @@
  */
 package com.ucr.proyecto.gui;
 
+import com.ucr.proyecto.main.Main;
 import com.ucr.proyecto.domain.Empleado;
 import java.awt.BorderLayout;
 import java.awt.Color;
