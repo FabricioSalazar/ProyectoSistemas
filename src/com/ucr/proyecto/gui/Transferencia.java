@@ -60,7 +60,7 @@ public class Transferencia extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jl_cuenta = new javax.swing.JLabel();
-        jb_cuentas = new javax.swing.JComboBox<String>();
+        jb_cuentas = new javax.swing.JComboBox<>();
         jb_transferir = new javax.swing.JButton();
         jtf_monto = new javax.swing.JTextField();
         jtf_detalle = new javax.swing.JTextField();
@@ -88,7 +88,7 @@ public class Transferencia extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jb_cuentas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jb_cuentas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jb_cuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_cuentasActionPerformed(evt);
@@ -166,7 +166,7 @@ public class Transferencia extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 31, Short.MAX_VALUE)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
