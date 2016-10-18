@@ -28,4 +28,6 @@ public class Constantes {
 
     public static Empleado empleadoNulo = new Empleado("No suministrado", "null", 0, "00000000", "No suministrado", 0);
     public static List<Transaccion> listaTransacciones = new ArrayList<>();
+    
+    public static boolean GUI=false;
 }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Client extends Thread {
 
@@ -28,7 +29,8 @@ public class Client extends Thread {
     private ObjectOutputStream salida;
     private ObjectInputStream entrada;
     private Console con = new Console();
-
+    private String respuesta="";
+    
     public Client(int puerto, String funcion) {
         super("Client");
         this.PUERTO = puerto;
@@ -75,18 +77,31 @@ public class Client extends Thread {
                     break;
                 case Constantes.ENVIAR_TRANSACCION_ACREDITAR://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
-                    con.setRespuesta((String)entrada.readObject());
-                    System.out.println(con.getRespuesta());//imprime si la transaccion se realizo o no
+                    respuesta=(String)entrada.readObject();
+                    if(Constantes.GUI){
+                        JOptionPane.showMessageDialog(null, respuesta);
+                    }else{
+                        System.out.println(respuesta);//imprime si la transaccion se realizo o no
+                    }
+                    
                     break;
                 case Constantes.ENVIAR_TRANSACCION_DEBITAR://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
-                    con.setRespuesta((String)entrada.readObject());
-                    System.out.println(con.getRespuesta());//imprime si la transaccion se realizo o no
+                    respuesta=(String)entrada.readObject();
+                    if(Constantes.GUI){
+                        JOptionPane.showMessageDialog(null, respuesta);
+                    }else{
+                        System.out.println(respuesta);//imprime si la transaccion se realizo o no
+                    }
                     break;
                 case Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA://envia la transaccion y recibe el string si la transaccion se pudo realizar
                     salida.writeObject(this.transaccion);
-                    con.setRespuesta((String)entrada.readObject());
-                    System.out.println(con.getRespuesta());//imprime si la transaccion se realizo o no
+                     respuesta=(String)entrada.readObject();
+                    if(Constantes.GUI){
+                        JOptionPane.showMessageDialog(null, respuesta);
+                    }else{
+                        System.out.println(respuesta);//imprime si la transaccion se realizo o no
+                    }
                     break;
                 
             }//switch

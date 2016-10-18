@@ -9,6 +9,7 @@ import com.ucr.proyecto.domain.Empleado;
 import com.ucr.proyecto.gui.Console;
 import com.ucr.proyecto.gui.InicioDeSesion;
 import com.ucr.proyecto.gui.PanelDeControl;
+import com.ucr.proyecto.util.Constantes;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,6 +37,7 @@ public class Main {
         String seleccion = scan.next();
 
         if (seleccion.equalsIgnoreCase("S")) {
+            Constantes.GUI=true;
             try {
                 for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                     if ("Nimbus".equals(info.getName())) {

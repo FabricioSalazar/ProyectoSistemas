@@ -60,7 +60,7 @@ public class Transferencia extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jl_cuenta = new javax.swing.JLabel();
-        jb_cuentas = new javax.swing.JComboBox<>();
+        jb_cuentas = new javax.swing.JComboBox<String>();
         jb_transferir = new javax.swing.JButton();
         jtf_monto = new javax.swing.JTextField();
         jtf_detalle = new javax.swing.JTextField();
@@ -88,7 +88,7 @@ public class Transferencia extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jb_cuentas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jb_cuentas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jb_cuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_cuentasActionPerformed(evt);
@@ -141,7 +141,7 @@ public class Transferencia extends javax.swing.JPanel {
                                     .addComponent(jLabel1)
                                     .addGap(110, 110, 110))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
+                                    .addGap(22, 22, 22)
                                     .addComponent(jtf_monto, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addComponent(jb_transferir))))
@@ -166,7 +166,7 @@ public class Transferencia extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 31, Short.MAX_VALUE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -185,9 +185,13 @@ public class Transferencia extends javax.swing.JPanel {
         new Client(5700, Constantes.ENVIAR_TRANSACCION_ACREDITAR_OTRA_CUENTA, t)
                 .start();
         
+        
         if (p.getMonto() >= monto) {
             p.actualizaMonto(p.getMonto()-monto);
         }
+        
+        jtf_detalle.setText("");
+        jtf_monto.setText("");
     }//GEN-LAST:event_jb_transferirActionPerformed
 
     private void jtf_detalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_detalleActionPerformed
