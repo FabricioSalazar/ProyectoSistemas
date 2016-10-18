@@ -64,7 +64,6 @@ public class TablaTransacciones extends JPanel {
         if (!Constantes.listaTransacciones.isEmpty()) {
             data = new String[Constantes.listaTransacciones.size()][3];
             for (int i = 0; i < Constantes.listaTransacciones.size(); i++) {
-                System.out.println(Constantes.listaTransacciones.get(i).getFuncion());
                 data[i][0] = Constantes.listaTransacciones.get(i).getFecha();
                 data[i][1] = Constantes.listaTransacciones.get(i).getFuncion();
                 data[i][2] = Constantes.listaTransacciones.get(i).getCantidad() + "";
