@@ -147,6 +147,9 @@ public class Retiro extends javax.swing.JPanel {
         
         new Client(5700, Constantes.ENVIAR_TRANSACCION_DEBITAR, t).start();
         if(p.getMonto() >= monto) p.actualizaMonto(p.getMonto()-monto);
+        
+        jtf_Detalle.setText("");
+        jtf_monto.setText("");
     }//GEN-LAST:event_jb_retirarActionPerformed
 
 
