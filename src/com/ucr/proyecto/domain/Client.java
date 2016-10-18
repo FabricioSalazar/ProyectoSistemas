@@ -114,6 +114,7 @@ public class Client extends Thread {
                     Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
                     break;
                 case Constantes.ACTUALIZAR_LISTA:
+                    //salida.writeObject(this.transaccion);
                     salida.writeObject(transaccion.getEmpleado().getUsuario());
                     Constantes.listaTransacciones = (List<Transaccion>) entrada.readObject();
                     break;

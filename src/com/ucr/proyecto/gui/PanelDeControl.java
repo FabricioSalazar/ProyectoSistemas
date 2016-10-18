@@ -80,7 +80,6 @@ public class PanelDeControl extends javax.swing.JPanel {
         jl_Titular = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jl_Saldo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -171,13 +170,6 @@ public class PanelDeControl extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Refrescar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,10 +179,6 @@ public class PanelDeControl extends javax.swing.JPanel {
                 .addComponent(jp_Transacciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(338, 338, 338))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +190,7 @@ public class PanelDeControl extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jp_Transacciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 19, Short.MAX_VALUE))))
+                        .addGap(0, 53, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -225,12 +211,6 @@ public class PanelDeControl extends javax.swing.JPanel {
         Main.frame.setSize(900, 434);
     }//GEN-LAST:event_rb_RetiroActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Client cliente = new Client(5700, Constantes.ACTUALIZAR_LISTA);
-        cliente.start();
-        System.out.println("entro");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     public void actualizaMonto(double monto){
         jl_Saldo.setText("Saldo actual: "+monto);
     }
@@ -241,7 +221,6 @@ public class PanelDeControl extends javax.swing.JPanel {
         return Double.parseDouble(saldo);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
