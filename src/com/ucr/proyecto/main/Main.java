@@ -52,7 +52,7 @@ public class Main {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    frame = new JFrame();
+                    frame = new JFrame("TrendNET S.A");
                     inicioDeSesion = new InicioDeSesion();
                     frame.add(inicioDeSesion);
                     frame.pack();
